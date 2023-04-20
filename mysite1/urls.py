@@ -16,9 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from app01.views import account
+from app01.views import account, user, department
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('login/', account.login),
+    path('logout/', account.logout),
+    path('image/code/', account.image_code),
+
+    path('user/list/', user.user_list),
+    path('user/add/', user.user_add),
+
+    path('department/list/', department.department_list),
+    path('department/add/', department.department_add),
+    path('department/<int:nid>/delete/', department.department_delete),
+    path('department/<int:nid>/edit/', department.department_edit),
 ]

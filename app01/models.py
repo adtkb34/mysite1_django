@@ -3,7 +3,10 @@ from django.db import models
 # Create your models here.
 class Department(models.Model):
     """ 部门表 """
-    title = models.CharField(verbose_name='标题', max_length=32)
+    title = models.CharField(verbose_name='部门名称', max_length=32)
+
+    def __str__(self):
+        return self.title
 
 
 class UserInfo(models.Model):

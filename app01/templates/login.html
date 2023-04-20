@@ -1,43 +1,59 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- <link rel="stylesheet" href="style.css">-->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <title>Login Form Demo</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <style>
+        .account {
+            width: 400px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 5px 5px 20px #aaa;
+
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            padding: 20px 40px;
+        }
+
+        .account h2 {
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <div class="login-wrapper">
-    <form action="" class="form">
-      <img src="img/download.jpg" alt="">
-      <h2>Login</h2>
-      <div class="input-group">
-        <input type="text" name="loginUser" id="loginUser" autocomplete="off" required>
-        <label for="loginUser">User Name</label>
-      </div>
-      <div class="input-group">
-        <input type="password" name="loginPassword" id="loginPassword" required>
-        <label for="loginPassword">Password</label>
-      </div>
-      <input type="submit" value="Login" class="submit-btn">
-      <a href="#forgot-pw" class="forgot-pw">Forgot Password?</a>
-    </form>
-
-    <div id="forgot-pw">
-      <form action="" class="form">
-        <a href="#" class="close">&times;</a>
-        <h2>Reset Password</h2>
-        <div class="input-group">
-          <input type="email" name="email" id="email" required>
-          <label for="email">Email</label>
+<div class="account">
+    <h2>用户登录</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+            <label>用户名</label>
+            {{ form.name }}
+            <span style="color: red;">{{ form.username.errors.0 }}</span>
         </div>
-        <input type="submit" value="Submit" class="submit-btn">
-      </form>
-    </div>
-  </div>
+        <div class="form-group">
+            <label>密码</label>
+            {{ form.password }}
+            <span style="color: red;">{{ form.password.errors.0 }}</span>
+        </div>
+        <div class="form-group">
+            <label for="id_code">图片验证码</label>
+            <div class="row">
+                <div class="col-xs-7">
+                    {{ form.code }}
+                    <span style="color: red;">{{ form.code.errors.0 }}</span>
+                </div>
+                <div class="col-xs-5">
+                    <img id="image_code" src="/image/code/" style="width: 125px;">
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="登 录" class="btn btn-primary">
+    </form>
+</div>
+
 </body>
 </html>
